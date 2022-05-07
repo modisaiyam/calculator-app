@@ -17,3 +17,4 @@ This link has API documentation as well as web client to test API.
 
 localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config
 
+![plot](./swagger-ui.png)
