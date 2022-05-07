@@ -1,0 +1,83 @@
+openapi: 3.0.1
+info:
+  title: Calculator Service
+  description: Calculator Service REST API
+  version: 1.0.0
+servers:
+- url: /v2
+paths:
+  /calculation:
+    get:
+      summary: returns supported list of operator
+      responses:
+        200:
+          description: Success Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupportedOperationsRes'
+    post:
+      summary: perform calculation based on operator
+      operationId: doCalculation
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CalculationReq'
+        required: true
+      responses:
+        200:
+          description: Success Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CalculationRes'
+        400:
+          description: Error Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculationError'                
+components:
+  schemas:
+    SupportedOperationsRes:
+      type: array
+      items:
+        type: string
+    CalculationReq:
+      type: object
+      properties:
+        lOperand:
+          type: number
+          format: double
+        operation:
+          type: string
+          example: "+"
+        rOperand:
+          type: number
+          format: double
+    CalculationRes:
+      type: object
+      properties:
+        lOperand:
+          type: number
+          format: double
+        operation:
+          type: string
+          example: "+"
+        rOperand:
+          type: number
+          format: double
+        result:
+          type: number
+          format: double
+    CalculationError:
+      type: object
+      properties:
+        error_message:
+          type: string
